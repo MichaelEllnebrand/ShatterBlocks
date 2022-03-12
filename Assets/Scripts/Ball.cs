@@ -23,4 +23,15 @@ public class Ball : MonoBehaviour
         }
         
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Block block = collision.gameObject.GetComponent<Block>();
+        if (block != null)
+        {
+            block.Hit();
+        }
+    }
+
+    
 }
