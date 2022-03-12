@@ -1028,8 +1028,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfBlock: {fileID: 1505132930483420399, guid: 5f31122cdbf2a404d8de8015900c7482, type: 3}
-  position: {x: -20, y: 0, z: 40}
-  Width: 10
+  position: {x: -19, y: 40, z: 0}
+  Width: 13
   Height: 5
 --- !u!1 &1731907217
 GameObject:
