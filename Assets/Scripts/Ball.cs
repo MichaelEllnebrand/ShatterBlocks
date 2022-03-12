@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             speed = 30f;
-            rb.AddForce(new Vector3(0,0,speed),ForceMode.Impulse);
+            rb.AddForce(new Vector3(0,speed,0),ForceMode.Impulse);
         }
     }
 

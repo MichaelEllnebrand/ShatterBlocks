@@ -12,7 +12,7 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
-        float offset = (Width / 2) + (leftGameBorder.transform.localScale.y / 2);
+        float offset = (Width / 2) + (leftGameBorder.transform.localScale.x / 2);
         leftGameBorder.transform.position = new Vector3(-offset, leftGameBorder.transform.position.y, leftGameBorder.transform.position.z);
         rightGameBorder.transform.position = new Vector3(offset, rightGameBorder.transform.position.y, rightGameBorder.transform.position.z);
     }
