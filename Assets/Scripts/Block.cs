@@ -5,8 +5,6 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
 
-    
-
     public void Hit()
     {
         Destroy(gameObject);
