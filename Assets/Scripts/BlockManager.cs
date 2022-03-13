@@ -102,7 +102,8 @@ public class BlockManager : MonoBehaviour
         int y = Random.Range(0,Height);
         if (!isOccupied[x, y])
         {
-            SpawnBlock(x,y,defaultMaterial);
+            //SpawnBlock(x,y,defaultMaterial);
+            SpawnBlock(x, y, materials[y]);
         }
     }
 
