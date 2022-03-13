@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e9fe7bd4627cf4fa06e8e6e43c614c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyBlockEffect: {fileID: 2851067034925362001, guid: 3f26e8910c68bbe49923030ff749982b, type: 3}
 --- !u!198 &-6724644010094835639
 ParticleSystem:
   m_ObjectHideFlags: 0
