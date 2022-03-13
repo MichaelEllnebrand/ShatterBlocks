@@ -21,40 +21,54 @@ public class BlockManager : MonoBehaviour
     private Image spawnTimerImage;
     private int ghostColumn = 6;
 
+    private GameManager gameManager;
+
     void Awake()
     {
         transform.position = position;
         isOccupied = new bool[Width, Height];
         spawnTimer = spawnTimerMax;
+    }
+
+    void Start()
+    {
         spawnTimerImage = GameObject.Find("SpawnTimerImage").GetComponent<Image>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
     {
-        spawnTimerImage.fillAmount = spawnTimer / spawnTimerMax; 
+        if (gameManager.IsGameRunning)
+        {
+            UpdateBlockSpawner();
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                ghostColumn--;
+                if (ghostColumn < 0) ghostColumn = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                ghostColumn++;
+                if (ghostColumn > Width - 1) ghostColumn = Width - 1;
+            }
+        }
+        SetGhostPosition();
+    }
+
+    private void UpdateBlockSpawner()
+    {
+        spawnTimerImage.fillAmount = spawnTimer / spawnTimerMax;
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
             spawnTimer += spawnTimerMax;
             if (!SpawnBlockAtGhost())
             {
-                Debug.Log("GAME OVER");
+                gameManager.GameOver("Column full, failed to spawn block!");
             }
             SpawnBlockAtRandomPosition();
         }
-
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ghostColumn--;
-            if (ghostColumn < 0) ghostColumn = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            ghostColumn++;
-            if (ghostColumn > Width-1) ghostColumn = Width-1;
-        }
-        SetGhostPosition();
     }
 
     void SetGhostPosition()
