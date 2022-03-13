@@ -12,7 +12,6 @@ public class Block : MonoBehaviour
     private void Awake()
     {
         blockManager = FindObjectOfType<BlockManager>();
-        
     }
 
     public void SetPostion(int x, int y)

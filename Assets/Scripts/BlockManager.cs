@@ -6,6 +6,8 @@ public class BlockManager : MonoBehaviour
 {
     [SerializeField] GameObject pfBlock;
     [SerializeField] Material[] materials;
+    [SerializeField] Material defaultMaterial;
+    [SerializeField] GameObject spawnBlockEffect;
     [SerializeField] GameObject ghost;
     [SerializeField] Vector3 position;
     [SerializeField] int Width;
@@ -69,18 +71,22 @@ public class BlockManager : MonoBehaviour
             if (!isOccupied[x, y] && !isSpawned)
             {
                 isSpawned = true;
-                isOccupied[ghostColumn, y] = true;
+                SpawnBlock(x,y,materials[y]);
+
+                /*
+                isOccupied[x, y] = true;
                 Vector3 pos = new Vector3(position.x + x * pfBlock.transform.localScale.x, position.y + y * pfBlock.transform.localScale.y, 0);
                 GameObject b = Instantiate(pfBlock, pos, Quaternion.identity, transform);
                 b.transform.position = pos;
                 b.GetComponent<Renderer>().material = materials[y];
                 b.GetComponent<Block>().SetPostion(x, y);
+                */
             }
         }
         return isSpawned;
     }
 
-    void SpawnBlockRandom()
+    void SpawnBlockAtRandomPosition()
     {
         int x = Random.Range(0,Width);
         int y = Random.Range(0,Height);
@@ -93,6 +99,21 @@ public class BlockManager : MonoBehaviour
             b.transform.position = pos;
             b.GetComponent<Block>().SetPostion(x, y);
         }
+    }
+
+    void SpawnBlock(int x, int y, Material material)
+    {
+        isOccupied[x, y] = true;
+        Vector3 pos = new Vector3(position.x + x * pfBlock.transform.localScale.x, position.y + y * pfBlock.transform.localScale.y, 0);
+        GameObject b = Instantiate(pfBlock, pos, Quaternion.identity, transform);
+        b.transform.position = pos;
+        b.GetComponent<Block>().SetPostion(x, y);
+        b.GetComponent<Renderer>().material = material;
+        b.GetComponent<ParticleSystemRenderer>().material = material;
+        b.GetComponent<ParticleSystem>().Play();
+
+
+
     }
 
     public void FreeLocation(int x, int y)
