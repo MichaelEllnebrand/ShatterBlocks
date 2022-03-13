@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour
 {
     [SerializeField] GameObject pfBlock;
+    [SerializeField] Material[] materials;
     [SerializeField] GameObject ghost;
     [SerializeField] Vector3 position;
     [SerializeField] int Width;
@@ -21,6 +22,11 @@ public class BlockManager : MonoBehaviour
         transform.position = position;
         isOccupied = new bool[Width, Height];
         spawnTimer = spawnTimerMax;
+
+        foreach (Material mat in materials)
+        {
+            Debug.Log(mat);
+        }
     }
 
     void Update()
@@ -67,6 +73,7 @@ public class BlockManager : MonoBehaviour
                 Vector3 pos = new Vector3(position.x + x * pfBlock.transform.localScale.x, position.y + y * pfBlock.transform.localScale.y, 0);
                 GameObject b = Instantiate(pfBlock, pos, Quaternion.identity, transform);
                 b.transform.position = pos;
+                b.GetComponent<Renderer>().material = materials[y];
                 b.GetComponent<Block>().SetPostion(x, y);
             }
         }
