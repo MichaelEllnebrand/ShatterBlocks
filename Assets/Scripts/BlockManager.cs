@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlockManager : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class BlockManager : MonoBehaviour
     [SerializeField] int Width;
     [SerializeField] int Height;
 
+    private float columnWidth = 3.0f;
     private bool[,] isOccupied;
 
     [SerializeField] private float spawnTimerMax;
     private float spawnTimer;
+    private Image spawnTimerImage;
     private int ghostColumn = 6;
 
     void Awake()
@@ -23,10 +26,12 @@ public class BlockManager : MonoBehaviour
         transform.position = position;
         isOccupied = new bool[Width, Height];
         spawnTimer = spawnTimerMax;
+        spawnTimerImage = GameObject.Find("SpawnTimerImage").GetComponent<Image>();
     }
 
     void Update()
     {
+        spawnTimerImage.fillAmount = spawnTimer / spawnTimerMax; 
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
@@ -37,6 +42,7 @@ public class BlockManager : MonoBehaviour
             }
             SpawnBlockAtRandomPosition();
         }
+
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -53,7 +59,7 @@ public class BlockManager : MonoBehaviour
 
     void SetGhostPosition()
     {
-        ghost.transform.position = new Vector3(position.x + ghostColumn * ghost.transform.localScale.x, ghost.transform.position.y, ghost.transform.position.z);
+        ghost.transform.position = new Vector3(position.x + ghostColumn * columnWidth, ghost.transform.position.y, ghost.transform.position.z);
     }
 
     private bool SpawnBlockAtGhost()
