@@ -8,8 +8,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject ball;
     [SerializeField] GameObject gameOverCanvas;
     [SerializeField] Text gameOverText;
+    [SerializeField] Text scoreText;
+    [SerializeField] Text timerText;
+
+    private int score=0;
+    private float time;
 
     public bool IsGameRunning { get; private set; } = false;
+
+    private void Update()
+    {
+        if (IsGameRunning)
+        {
+            time = Time.time;
+            timerText.text = $"Time: {time}";
+
+
+        }
+    }
 
     public void StartGame()
     {
@@ -30,5 +46,12 @@ public class GameManager : MonoBehaviour
 
         gameOverCanvas.SetActive(true);
         gameOverText.text = reasonText;
+    }
+
+    public void AddScore()
+    {
+        score++;
+        scoreText.text = "Score: " + score;
+
     }
 }
