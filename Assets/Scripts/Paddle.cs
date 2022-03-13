@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Paddle : MonoBehaviour
 {
     
     [SerializeField] private Board board;
-    [SerializeField] private float speed = 1;
+    [SerializeField] private float speed = 10;
+    [SerializeField] Slider mouseSlider;
 
     public float Width { get; private set; }
 
@@ -26,6 +28,7 @@ public class Paddle : MonoBehaviour
 
     void Update()
     {
+        speed = mouseSlider.value;
 
         float movement = Input.GetAxis("Mouse X");
         float postion = transform.position.x + (movement * Time.deltaTime * speed);
