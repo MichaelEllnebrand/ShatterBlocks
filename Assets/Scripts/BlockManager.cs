@@ -34,6 +34,11 @@ public class BlockManager : MonoBehaviour
     {
         spawnTimerImage = GameObject.Find("SpawnTimerImage").GetComponent<Image>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        for (int i = 0; i < 30; i++)
+        {
+            SpawnBlockAtRandomPosition();
+        }
+
     }
 
     void Update()

@@ -5,11 +5,13 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody rb;
+    private GameManager gameManager;
     [SerializeField] private float speed=30;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = gameObject.GetComponent<Rigidbody>();
         rb.AddForce(new Vector3(0, speed, 0), ForceMode.Impulse);
     }
@@ -40,6 +42,15 @@ public class Ball : MonoBehaviour
                     rb.velocity = newDirection * speed;
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("OutOfBounds"))
+        {
+            gameManager.GameOver("Ball lost!");
+
         }
     }
 }
