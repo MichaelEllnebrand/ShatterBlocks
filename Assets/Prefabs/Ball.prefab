@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
+  nudgeFactor: 5
 --- !u!96 &-9162823020867624010
 TrailRenderer:
   serializedVersion: 2
