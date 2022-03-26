@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] private float speed = 30;
     [SerializeField] private float nudgeFactor = 3;
+    [SerializeField] private AudioClip clip;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +22,8 @@ public class Ball : MonoBehaviour
     {
         if (rb.velocity.magnitude > 0 && Mathf.Abs(rb.velocity.y) < nudgeFactor)
         {
-            float directionX = rb.velocity.x > 0 ? nudgeFactor / speed : directionX = -(nudgeFactor / speed);
-            float directionY = rb.velocity.y > 0 ? (speed - nudgeFactor) / speed : directionY = -((speed - nudgeFactor) / speed);
+            float directionX = rb.velocity.x > 0 ? nudgeFactor / speed : -(nudgeFactor / speed);
+            float directionY = rb.velocity.y > 0 ? (speed - nudgeFactor) / speed : -((speed - nudgeFactor) / speed);
 
             Vector3 newDirection = new Vector3(directionX, directionY, 0).normalized;
             rb.velocity = newDirection * speed;
@@ -31,6 +32,7 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        AudioManager.Instance.PlaySound(clip);
         if (collision.gameObject.CompareTag("Block"))
         {
             Block block = collision.gameObject.GetComponent<Block>();
@@ -63,7 +65,6 @@ public class Ball : MonoBehaviour
         if (other.CompareTag("OutOfBounds"))
         {
             gameManager.GameOver("Ball lost!");
-
         }
     }
 }

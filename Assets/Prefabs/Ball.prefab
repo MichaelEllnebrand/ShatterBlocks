@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   nudgeFactor: 5
+  clip: {fileID: 8300000, guid: 9a48b4e6d0806b943928b6a8d2c54e87, type: 3}
 --- !u!96 &-9162823020867624010
 TrailRenderer:
   serializedVersion: 2
